@@ -1,0 +1,107 @@
+							PVR Application Official Documentation
+																:- Surag VC
+E - Entity
+R - Repository
+S - Services 
+EX - Exceptions
+C - Controller
+CM - Components
+										Entity's
+E1- UserInterface.java
+	It is implemented for making the object in a loosely coupled manner.
+	
+E2- Admin.java
+	The Admin entity is implementing UserInterface interface.It contains the basic details and role as 'ADMIN'.
+
+E3- Customer.java
+	The Customer entity is implementing UserInterface interface.It contains the basic details and role as 'USER'.
+
+E4- Movie.java
+	This entity represents movies available on the website.
+	
+	E4.1 -> Movie have one to one relationship between cast(Contains movie cast names);
+	
+E4- Cast.java
+	This class contains the details of movie cast details. 
+	
+										Repository
+R1- AdminDAO.java
+	This interface deals with Admin entity and the admin table on the database.It extends
+JPArepository interface to perform CRUD operations on the database. 
+
+R2- CustomerDAO.java
+	This interface deals with Customer entity and the customer table on the database.It extends
+JPArepository interfaceto perform CRUD operations on the database. 
+
+R3- MovieDAO.java
+	This interface deals with Movie entity and the movie table on the database.It extends
+JPArepository interfaceto perform CRUD operations on the database.
+
+R4- CastDAO.java
+	This interface will work with the cast class and it connects with the database for CRUD operations of this class.
+
+										Services
+S1- AdminService.java
+	AdminService is an interface that includes all the services provided to the ADMIN role users.
+All its methods are implemented on AdminServiceImpl service layer class.
+
+S2- AdminServiceImpl.java
+	It's a service layer class that implemented the AdminServices interface. The methods implemented in this class 
+have the logic of services provided to the user which have the 'ADMIN' role.
+This class has three variables two of them are instance of DAO layers and one of them is an instance of a password encoder.
+These variables are autowired through the constructor.
+
+	S2.1 -> This method has the logic of saving a new Admin user into the database. If the Admin is already registered 
+with the same email provided then it will throw an exception.
+	S2.2 -> The method will take two parameters has arguments and checks it is available in the database. 
+If it is available then returns a message object as response or it will throw an error.
+	S2.3 -> The method will take two parameters has arguments and check whether the admin user is available on the database or not. 
+If it is available on the database it will get deleted or will throw an error.
+	S2.4 -> The method will take an admin object as a parameter. The method checks the admin is available on the database 
+with the same adminId provided through the argument. If available then it will be updated by the new object provided as an argument
+else it throws an error.
+	S2.5 -> It will extract all the details from the customer table and provide a list as a response. If the table is empty 
+then it will throw an error.
+	S2.6 -> The method takes a Long number as an argument if the number is a primary key of any customer then it will give the 
+Customer object as a response or it will throw an error.
+
+S3- CustomerService.java
+	It's an interface that contains all the services provided to the customer.
+	
+S4- CustomerServiceImpl.java
+	It's an implementation class of the CustomerServices interface marked with @Service annotation. It overrode all the methods 
+available on the CustomerServices interface.
+
+S5- MovieService.java
+S6- MovieServiceImpl.java
+S7- CastService.java
+S8- CastServiceImpl.java 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
