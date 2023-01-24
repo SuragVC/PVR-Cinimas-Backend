@@ -37,15 +37,15 @@
 server.port=8888
 
 #db specific properties
-spring.datasource.url=jdbc:mysql://localhost:3306/PVRCinimas
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.username=root
-spring.datasource.password=root
-
+#spring.datasource.url=jdbc:mysql://localhost:3306/PVRCinimas
+#spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#spring.datasource.username=root
+#spring.datasource.password=root
+</br>
 #ORM s/w specific properties
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-
-spring.mvc.throw-exception-if-no-handler-found=true
-spring.mvc.pathmatch.matching-strategy = ANT_PATH_MATCHER
-logging.level.my.package.name=DEBUG</p>
+#spring.jpa.hibernate.ddl-auto=update
+#spring.jpa.show-sql=true
+</br>
+#spring.mvc.throw-exception-if-no-handler-found=true
+#spring.mvc.pathmatch.matching-strategy = ANT_PATH_MATCHER
+#logging.level.my.package.name=DEBUG</p>
