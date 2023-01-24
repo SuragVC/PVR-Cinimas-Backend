@@ -34,17 +34,18 @@
 <h2>Database authorization : </h2>
 <h4>#changing the server port</h4>
 <p>server.port=8888</p>
-</br>
+
 <h4>#db specific properties</h4>
 <p>spring.datasource.url=jdbc:mysql://localhost:3306/PVRCinimas</p>
 <p>spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</p>
 <p>spring.datasource.username=root</p>
 <p>spring.datasource.password=root</p>
-</br>
+
 <h4>#ORM s/w specific properties</h4>
 <p>spring.jpa.hibernate.ddl-auto=update</p>
 <p>spring.jpa.show-sql=true</p>
-</br>
+
 <p>spring.mvc.throw-exception-if-no-handler-found=true</p>
 <p>spring.mvc.pathmatch.matching-strategy = ANT_PATH_MATCHER</p>
 <p>logging.level.my.package.name=DEBUG</p>
+<p align="center"><image src="https://media.tenor.com/THSSOLP5yUkAAAAi/anime-animated-text.gif" width="400px" height="200px"/></p>
