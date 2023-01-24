@@ -51,7 +51,7 @@ public class AdminController {
 	
 	@CrossOrigin
 	@PostMapping("/adminUser/register")
-	public ResponseEntity<Message> registerAdminHandler(@Valid @RequestBody Admin admin) throws AdminException{
+	public ResponseEntity<Message> Admin_Signup_Handler(@Valid @RequestBody Admin admin) throws AdminException{
 		
 		Message msg = adminService.registerAdmin(admin);
 		
@@ -61,7 +61,7 @@ public class AdminController {
 	
 	  @CrossOrigin
 	  @PostMapping("/adminUser/login")
-	  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+	  public ResponseEntity<?> Admin_Login_Handler(@Valid @RequestBody LoginRequest loginRequest) {
 
 	    Authentication authentication = authenticationManager.authenticate(
 	        new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
@@ -79,7 +79,7 @@ public class AdminController {
 
 	@CrossOrigin
 	@PostMapping("/admin/update")
-	public ResponseEntity<Message> updateAdminHandler(@Valid @RequestBody Admin admin) throws AdminException{
+	public ResponseEntity<Message> Admin_Update_Handler(@Valid @RequestBody Admin admin) throws AdminException{
 		
 		Message msg = adminService.updateAdmin(admin);
 		
@@ -88,7 +88,7 @@ public class AdminController {
 	  
 	@CrossOrigin
 	@DeleteMapping("/admin/delete/{user}/{password}")
-	public ResponseEntity<Message> deleteAdminHandler (@PathVariable String user ,@PathVariable String password) throws AdminException{
+	public ResponseEntity<Message> Admin_Delete_Handler (@PathVariable String user ,@PathVariable String password) throws AdminException{
 		
 		Message msg = adminService.deleteAdmin(user, password);
 		
@@ -100,7 +100,7 @@ public class AdminController {
 	
 	@CrossOrigin
 	@GetMapping("/admin/customers")
-	public ResponseEntity<List<Customer>> getCustomersHandler () throws CustomerException{
+	public ResponseEntity<List<Customer>> Get_All_Customers () throws CustomerException{
 		
 		List<Customer> customers = adminService.getAllCustomers();
 		
@@ -109,7 +109,7 @@ public class AdminController {
 	
 	@CrossOrigin
 	@GetMapping("/admin/customers/{id}")
-	public ResponseEntity<Customer> getCustomerHandler (@PathVariable Long id) throws CustomerException{
+	public ResponseEntity<Customer> Find_Customer_By_ID (@PathVariable Long id) throws CustomerException{
 		
 		Customer customer = adminService.getCustomerDetailsById(id);
 		

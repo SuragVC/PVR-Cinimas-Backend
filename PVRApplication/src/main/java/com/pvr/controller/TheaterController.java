@@ -33,7 +33,7 @@ public class TheaterController {
 		return new ResponseEntity<Theater>(savedTheater,HttpStatus.CREATED);
 	}
 	@GetMapping("/admin/theater/movie/update")
-	public ResponseEntity<Theater>Uodate_Running_Movie_From_Theater(@RequestParam String movieName,@RequestParam String theaterName) throws TheaterException{
+	public ResponseEntity<Theater>Update_Running_Movie_From_Theater(@RequestParam String movieName,@RequestParam String theaterName) throws TheaterException{
 		Theater savedTheater=theaterService.updateRunningMovie(movieName, theaterName);
 		return new ResponseEntity<Theater>(savedTheater,HttpStatus.OK);
 	}

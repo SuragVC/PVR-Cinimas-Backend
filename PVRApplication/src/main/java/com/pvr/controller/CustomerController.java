@@ -45,7 +45,7 @@ public class CustomerController {
 	
 	@CrossOrigin
 	@PostMapping("/customer/register")
-	public ResponseEntity<Customer> registerCustomerHandler(@Valid @RequestBody Customer customer) throws CustomerException{
+	public ResponseEntity<Customer> Customer_Signup_Handler(@Valid @RequestBody Customer customer) throws CustomerException{
 		
 		Customer cust = customerService.registerCustomer(customer);
 		
@@ -54,7 +54,7 @@ public class CustomerController {
 	
 	@CrossOrigin
 	@PostMapping("/customer/update")
-	public ResponseEntity<Message> updateCustomerHandler(@Valid @RequestBody Customer customer) throws CustomerException{
+	public ResponseEntity<Message> Customer_Update_Handler(@Valid @RequestBody Customer customer) throws CustomerException{
 		
 		Message msg = customerService.updateCustomer(customer);
 		
@@ -63,7 +63,7 @@ public class CustomerController {
 	
 	@CrossOrigin
 	@DeleteMapping("/customer/delete/{user}/{password}")
-	public ResponseEntity<Message> deleteCustomerHandler( @PathVariable String user ,@PathVariable String password) throws CustomerException{
+	public ResponseEntity<Message> Customer_Delete_Handler( @PathVariable String user ,@PathVariable String password) throws CustomerException{
 		
 		Message msg = customerService.deleteCustomer(user, password);
 		
@@ -73,7 +73,7 @@ public class CustomerController {
 	
 	  @CrossOrigin
 	  @PostMapping("/customer/login")
-	  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+	  public ResponseEntity<?>Customer_Login_Handler(@Valid @RequestBody LoginRequest loginRequest) {
 
 	    Authentication authentication = authenticationManager.authenticate(
 	        new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
