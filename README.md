@@ -8,7 +8,8 @@
 <p>-> Immutable object for saving PVR object.</p>
 <p>-> JUnit testing for some API's.</p>
 <p>-> Automated primary key generator using database.</p>
-<p>-> Difrent API's for various purpose.</p>
+<p>-> Different API's for various purpose.</p>
+<p>-> Pagination added on the backend.</p>
 </br>
 <h2>Techstacks used : </h2>
 <p>-> Java 17</p>
