@@ -10,21 +10,26 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pvr.entity.Customer;
 import com.pvr.entity.MovieTicket;
 import com.pvr.entity.PVRCinimasObject;
 import com.pvr.entity.Payments;
 import com.pvr.entity.Theater;
 import com.pvr.exceptions.TicketException;
 import com.pvr.exceptions.TicketSerilizationException;
+import com.pvr.repository.CustomerDAO;
 import com.pvr.repository.MovieTicketDAO;
 import com.pvr.repository.PaymentsDAO;
 import com.pvr.repository.TheaterDAO;
 import com.pvr.util.DeSerilizeTickets;
 import com.pvr.util.GeneratePrimaryKey;
 import com.pvr.util.SerilizeTickets;
+import com.pvr.util.TwilioSMSService;
 
 @Service
 public class MovieTicketServiceImpl implements MovieTicketServices {
@@ -32,19 +37,22 @@ public class MovieTicketServiceImpl implements MovieTicketServices {
 	private PaymentsDAO paymentsDao;
 	private TheaterDAO theaterDao;
 	private GeneratePrimaryKey key;
-
+	private CustomerDAO customerDao;
+	private TwilioSMSService smsService;
 	@Autowired
-	public MovieTicketServiceImpl(MovieTicketDAO ticketDao, PaymentsDAO paymentsDao, TheaterDAO theaterDao,
+	public MovieTicketServiceImpl(MovieTicketDAO ticketDao, PaymentsDAO paymentsDao, TheaterDAO theaterDao,CustomerDAO customerDao,TwilioSMSService smsService,
 			GeneratePrimaryKey key) {
 		this.ticketDao = ticketDao;
 		this.paymentsDao = paymentsDao;
 		this.theaterDao = theaterDao;
 		this.key = key;
+		this.customerDao= customerDao;
+		this.smsService= smsService;
 	}
 
 	@Override
+	@Transactional
 	public List<Object> bookATicket(MovieTicket ticket) throws TicketException {
-		
 		Optional<Theater> theater = theaterDao.findByName(ticket.getTheaterName());
 		if (theater.isEmpty())
 			throw new TicketException("!ALERT! Theater not found by the name " + ticket.getTheaterName());
@@ -54,29 +62,41 @@ public class MovieTicketServiceImpl implements MovieTicketServices {
 			throw new TicketException("!ALERT! Minimum 1 ticket needs to book");
 		if (theater.get().getAvailableSeats() < ticket.getTicketCount())
 			throw new TicketException("!ALERT! " + ticket.getTicketCount() + " Seats not available in the theater!");
+		
 		Payments payment = ticket.getPayment();
 		Double price = theater.get().getPriceForSeat();
 		Double totalPrice = price * ticket.getTicketCount();
+		
 		if (totalPrice > payment.getTotalPayment())
 			throw new TicketException("!ALERT! Not enough money, Total payment needed = " + totalPrice);
 		if (totalPrice < payment.getTotalPayment())
 			payment.setReturnAmount(totalPrice - payment.getTotalPayment());
-
 		theater.get().setAvailableSeats(theater.get().getAvailableSeats() - ticket.getTicketCount());
-
 		theaterDao.save(theater.get());
 		payment.setPaymentID(key.generatePrimaryKey());
 		ticket.setMovieTicketID(key.generatePrimaryKey());
 		ticket.setStatus("ACTIVE");
+
 		paymentsDao.save(payment);
 		ticketDao.save(ticket);
+		
+
+		List<Object> response =new ArrayList<>(Arrays.asList(ticket, theater));
+		
+		Optional<Customer>customerOpt=customerDao.findByMobileNo(ticket.getMobileNo());
+		if(customerOpt.isPresent()) response.add(customerOpt.get());
+
+		if(smsService.confirmationSMSSender(ticket,theater.get()))response.add("Mobile confirmation sent Successfully!");
+
 		PVRCinimasObject homeObject= new PVRCinimasObject();
-		List<Object> response = Arrays.asList(ticket, theater,homeObject);
+		response.add(homeObject);
+
 		return response;
 	}
 
 	@Override
-	public MovieTicket cancelATicket(Long ticketID) throws TicketException {
+	@Transactional
+	public List<Object> cancelATicket(Long ticketID) throws TicketException {
 		Optional<MovieTicket> ticket = ticketDao.findById(ticketID);
 		if (ticket.isEmpty())
 			throw new TicketException("!ALERT! Ticket not found with Ticket ID : " + ticketID);
@@ -84,7 +104,11 @@ public class MovieTicketServiceImpl implements MovieTicketServices {
 		Theater theater = theaterDao.findByName(ticket.get().getTheaterName()).get();
 		theater.setAvailableSeats(theater.getAvailableSeats() + ticket.get().getTicketCount());
 		theaterDao.save(theater);
-		return ticketDao.save(ticket.get());
+		ticketDao.save(ticket.get());
+		List<Object>list=new ArrayList<>();
+		list.add(ticket);
+		if(smsService.cancelSMSSender(ticket.get()))list.add("Confirmation SMS sent to your registered mobile no!");
+		return list;
 	}
 
 	@Override
