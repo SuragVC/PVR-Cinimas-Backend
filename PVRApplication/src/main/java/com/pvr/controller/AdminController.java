@@ -31,6 +31,7 @@ import com.pvr.payloads.JwtResponse;
 import com.pvr.payloads.LoginRequest;
 import com.pvr.payloads.Message;
 import com.pvr.services.AdminService;
+import com.pvr.util.TwilioSMSService;
 
 @RestController
 @RequestMapping("pvr")
@@ -47,7 +48,6 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
-	
 	
 	@CrossOrigin
 	@PostMapping("/adminUser/register")
@@ -79,7 +79,7 @@ public class AdminController {
 
 	@CrossOrigin
 	@PostMapping("/admin/update")
-	public ResponseEntity<Message> Admin_Update_Handler(@Valid @RequestBody Admin admin) throws AdminException{
+	public ResponseEntity<Message>Admin_Update_Handler(@Valid @RequestBody Admin admin) throws AdminException{
 		
 		Message msg = adminService.updateAdmin(admin);
 		
@@ -116,7 +116,7 @@ public class AdminController {
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
 	
-	
+
 
 }
 

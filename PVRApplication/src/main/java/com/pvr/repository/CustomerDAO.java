@@ -10,5 +10,6 @@ import com.pvr.entity.Customer;
 public interface CustomerDAO extends JpaRepository<Customer, Long>{
 	
 	Optional<Customer> findByEmail(String email);
-
+	
+	Optional<Customer>  findByMobileNo(String mobileNo);
 }
