@@ -1,6 +1,7 @@
 package com.pvr.controller;
 
 import java.io.IOException;
+import java.net.http.HttpHeaders;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -34,9 +35,9 @@ public class TicketBookingController {
 		return new ResponseEntity<List<Object>>(bookedTicket,HttpStatus.OK);
 	}
 	@GetMapping("/user/ticket/cancel")
-	public ResponseEntity<MovieTicket>Cancel_A_Ticket(@RequestParam Long ticketid) throws TicketException{
-		MovieTicket canceledTicket=ticketServices.cancelATicket(ticketid);
-		return new ResponseEntity<MovieTicket>(canceledTicket,HttpStatus.OK);
+	public ResponseEntity<List<Object>>Cancel_A_Ticket(@RequestParam Long ticketid) throws TicketException{
+		List<Object> canceledTicket=ticketServices.cancelATicket(ticketid);
+		return new ResponseEntity<List<Object>>(canceledTicket,HttpStatus.OK);
 	}
 	@GetMapping("/admin/ticket/serilize")
 	public ResponseEntity<String>Serilize_All_The_Tickets() throws TicketSerilizationException, IOException {

@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +28,13 @@ public class MovieTicket implements Serializable{
 	private String theaterName;
 	
 	private Integer ticketCount;
+	
+	@NotNull
+	@NotBlank
+	@Size(min=10,max=10,message="Mobile no must be 10 digits!")
+	@Pattern(regexp = "\\d+", message="Mobile number should be digits only!")
+	private String mobileNo;
+	
 	@OneToOne
 	private Payments payment;
 	private String status;

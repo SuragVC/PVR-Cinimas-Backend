@@ -9,7 +9,11 @@ import com.pvr.exceptions.TicketSerilizationException;
 
 public interface MovieTicketServices {
 	public List<Object>bookATicket(MovieTicket ticket)throws TicketException;
-	public MovieTicket cancelATicket(Long ticketID)throws TicketException;
+	
+	public List<Object> cancelATicket(Long ticketID)throws TicketException;
+	
 	public String serilizeAllTheTickets()throws TicketSerilizationException, IOException;
+	
 	public List<MovieTicket> deSerilizeAllTheTickets()throws TicketSerilizationException, IOException;
+	
 }
