@@ -10,6 +10,7 @@
 <p>-> Automated primary key generator using database.</p>
 <p>-> Different API's for various purpose.</p>
 <p>-> Pagination added on the backend.</p>
+<p>-> Realtime SMS notification for ticket booking(Using free account only available for selected mobile numbers).</p>
 </br>
 <h2>Techstacks used : </h2>
 <p>-> Java 17</p>
