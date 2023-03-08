@@ -11,20 +11,10 @@
 <p>-> Different API's for various purpose.</p>
 <p>-> Pagination added on the backend.</p>
 <p>-> Realtime SMS notification for ticket booking(Using free account only available for selected mobile numbers).</p>
+
 </br>
-<h2>Techstacks used : </h2>
-<p>-> Java 17</p>
-<p>-> MySQL database</p>
-<p>-> Spring</p>
-<p>-> SpringBoot</p>
-<p>-> Spring MVC</p>
-<p>-> JPA</p>
-<p>-> Hibernate</p>
-<p>-> Maven</p>
-<p>-> Lombok</p>
-<p>-> Swagger UI</p>
-<p>-> JUnit 5</p>
-<p>-> Java 8 features(Lambda expression, Functional interface,etc...</p>
+<p align="center"><img src="https://github-readme-tech-stack.vercel.app/api/cards?title=Tech%20Stack%20Used&align=center&titleAlign=center&lineCount=2&theme=cyberpunk&line1=Java%20,Java,1c9a97;Spring,Spring,9a110e;Spring%20Security%C2%A0,Spring%20Security,82b88d;JUnit,JUnit,29ce2a;&line2=MySQL,MySQL,971c5e;Hibernate,Hibernate,9dd558;Spring%20MVC,Spring%20MVC,7ba6e4;Swagger,Swagger,1c4eb5;" alt="My Tech Stack" />
+</p>
 </br>
 <h2>Images : </h2>
 <p><image src="https://i.imgur.com/etW1knT.png"/></p>
