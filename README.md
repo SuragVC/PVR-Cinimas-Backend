@@ -1,4 +1,4 @@
-<h1 align="center">PVR-Cinimas-Backend</h1>
+<h1 align="center"><i>PVR-Cinimas-Backend</i></h1>
 <p>It's an imaginary backend application that mimics the working of PVR cinemas. It's an individual project in which I have worked with Java, SpringBoot, JPA, Hibernate, JWT Tokens, Spring Security, Maven, JUnit 5, and MySql as Backend.</p>
 <p  align="center"><image src="https://media.tenor.com/UW05sKVRbDkAAAAC/minions.gif"/></p>
 <h2>Features : </h2>
